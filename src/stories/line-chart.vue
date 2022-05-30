@@ -39,10 +39,11 @@ export default defineComponent({
     title: String,
     xLabel: Array,
     lineLabel: Boolean,
+    lineLabelPos: String,
     colorList: String,
     rotate: Number,
-    lineLabelPos: String,
     yName: String,
+    areaStyle: String,
   },
   components: {
     VChart,
@@ -57,6 +58,12 @@ export default defineComponent({
         text: props.title,
         left: "center",
       },
+      grid: {
+        left: "20",
+        right: "20",
+        bottom: "20",
+        containLabel: true,
+      },
       xAxis: {
         type: "category",
         data: props.xLabel,
@@ -69,20 +76,23 @@ export default defineComponent({
         name: props.yName,
         type: "value",
       },
-      series: [
+      series:  [
         {
           type: "line",
           data: props.value,
+          areaStyle: {
+            color: props.areaStyle,
+          },
+          lineStyle: {
+            color: props.colorList[0],
+          },
+          label: {
+            show: props.lineLabel,
+            position: props.lineLabelPos,
+            // color: "black",
+          },
         },
       ],
-      lineStyle: {
-        color: props.colorList[0],
-      },
-      label: {
-        show: props.lineLabel,
-        position: props.lineLabelPos,
-        // color: "black",
-      },
     });
 
     return { option };
@@ -91,11 +101,11 @@ export default defineComponent({
 </script>
 <style scoped>
 .chart {
-  height: 420px;
+  height: 280px;
+  padding: 15px;
   width: 900px;
+  border-radius: 10px;
+  background: #eef8f9;
 }
-/* .vueChart {
-  height: 400px;
-} */
 </style>
 

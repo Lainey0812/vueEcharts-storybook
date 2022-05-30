@@ -1,4 +1,5 @@
 // import MyButton from './Button.vue';
+import { Secondary } from "./Button.stories";
 import LineChart from "./line-chart.vue";
 
 // console.log(LineChart)
@@ -6,8 +7,14 @@ import LineChart from "./line-chart.vue";
 export default {
   title: "Example/Line",
   component: LineChart,
-
+  parameters: {
+    layout: "centered",
+  },
   argTypes: {
+    lineLabel: {
+      control: "boolean",
+      default: false,
+    },
     lineLabelPos: {
       control: { type: "select" },
       options: ["top", "left", "right", "bottom", "inside"],
@@ -21,10 +28,17 @@ export default {
       defaultValue: [10, 11, 12, 13, 22],
     },
     colorList: {
-      control: {type: 'color'},
-      defaultValue:"rgba(16, 142, 243, 0)",
-      type: { required: true }
+      control: { type: "color" },
+      defaultValue: "rgba(16, 142, 243, 0)",
+      type: { required: true },
     },
+    areaStyle: {
+      control: { type: "color" },
+    },
+    yName: {
+      type:{name: "string"},
+      description: "the unit/name of yAxis"
+    }
   },
 };
 
@@ -43,7 +57,12 @@ const Template = (args, argTypes) => ({
 
 export const Single = Template.bind({});
 Single.args = {
-  title: "今日测试",
-  lineLabel: false,
+  title: "single-line chart",
   yName: "%",
 };
+
+export const MultiLine = Template.bind({});
+MultiLine.args ={
+  title: "multi-Line",
+  // value: [{name:first, data:[13, 16, 17, 18,22]},{name: second, data:[ tom, jerry, lily, amy]}]
+}
